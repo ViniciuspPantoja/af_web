@@ -1,0 +1,6 @@
+<div class="saldo-container">
+  <div class="saldo-label">Saldo Atual:</div>
+  <div class="saldo-value" [class.positive]="saldo >= 0" [class.negative]="saldo < 0">
+    {{ saldo | currency:'BRL':'symbol':'1.2-2' }}
+  </div>
+</div>

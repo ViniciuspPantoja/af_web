@@ -1,0 +1,130 @@
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list-header {
+  margin-bottom: 1rem;
+}
+
+.btn-reload {
+  padding: 0.5rem 1rem;
+  background: #666;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-reload:hover {
+  background: #555;
+}
+
+.loading,
+.empty-state {
+  color: #666;
+  padding: 1rem 0;
+}
+
+.transacao-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.transacao-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.transacao-item:last-child {
+  border-bottom: none;
+}
+
+.transacao-text {
+  color: black;
+  flex: 1;
+}
+
+.receita-color {
+  color: #28a745;
+}
+
+.despesa-color {
+  color: #dc3545;
+}
+
+.transacao-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-edit {
+  padding: 0.25rem 0.75rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-edit:hover {
+  background: #0056b3;
+}
+
+.btn-delete {
+  padding: 0.25rem 0.75rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-delete:hover {
+  background: #c82333;
+}
+
+.filters-section {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filters-section label {
+  font-size: 0.9rem;
+  color: black;
+  font-weight: normal;
+}
+
+.filter-select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: white;
+  color: black;
+  font-family: inherit;
+  width: 100%;
+  max-width: 300px;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #999;
+}
+

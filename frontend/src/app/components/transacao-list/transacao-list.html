@@ -1,0 +1,23 @@
+<div class="list-container">
+  <div *ngIf="filteredTransacoes.length === 0" class="empty-state">
+    Nenhuma transação encontrada.
+  </div>
+
+  <ul *ngIf="filteredTransacoes.length > 0" class="transacao-list">
+    <li *ngFor="let transacao of filteredTransacoes" class="transacao-item">
+      <span class="transacao-text">
+        {{ transacao.descricao }} — {{ transacao.categoria }} — 
+        {{ transacao.tipo === 'receita' ? 'Receita' : 'Despesa' }} — 
+        {{ formatDate(transacao.data) }} — 
+        <span [class.receita-color]="transacao.tipo === 'receita'" [class.despesa-color]="transacao.tipo === 'despesa'">
+          {{ transacao.tipo === 'receita' ? '+' : '-' }}{{ transacao.valor | currency:'BRL':'symbol':'1.2-2' }}
+        </span>
+      </span>
+      <div class="transacao-actions">
+        <button class="btn-edit" (click)="onEdit(transacao)">Editar</button>
+        <button class="btn-delete" (click)="onDelete(transacao._id)">Excluir</button>
+      </div>
+    </li>
+  </ul>
+</div>
+

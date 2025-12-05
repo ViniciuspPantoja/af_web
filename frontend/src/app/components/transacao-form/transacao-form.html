@@ -1,0 +1,60 @@
+<form (ngSubmit)="onSubmit()" #transacaoForm="ngForm" class="simple-form">
+  <div class="form-group">
+    <label for="tipo">Tipo</label>
+    <select id="tipo" name="tipo" [(ngModel)]="formData.tipo" required>
+      <option value="receita">Receita</option>
+      <option value="despesa">Despesa</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="categoria">Categoria</label>
+    <select id="categoria" name="categoria" [(ngModel)]="formData.categoria" required>
+      <option value="">Selecione uma categoria</option>
+      <option *ngFor="let cat of categoriasComuns" [value]="cat">{{ cat }}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="descricao">Descrição</label>
+    <input
+      type="text"
+      id="descricao"
+      name="descricao"
+      [(ngModel)]="formData.descricao"
+      required
+      placeholder="Ex: Compra no supermercado"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="valor">Valor</label>
+    <input
+      type="number"
+      id="valor"
+      name="valor"
+      [(ngModel)]="formData.valor"
+      required
+      min="0"
+      step="0.01"
+      placeholder="0.00"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="data">Data</label>
+    <input
+      type="text"
+      id="data"
+      name="data"
+      [(ngModel)]="formData.data"
+      required
+      placeholder="Ex: 2024-01-15 ou 15/01/2024"
+    />
+  </div>
+
+  <button type="submit" [disabled]="!transacaoForm.valid" class="btn-save">
+    Salvar
+  </button>
+</form>
+

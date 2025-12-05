@@ -1,0 +1,26 @@
+.saldo-container {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.saldo-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.saldo-value {
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: black;
+}
+
+.saldo-value.positive {
+  color: #28a745;
+}
+
+.saldo-value.negative {
+  color: #dc3545;
+}

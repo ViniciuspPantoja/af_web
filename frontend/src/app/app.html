@@ -1,0 +1,23 @@
+<div class="app-container">
+  <h1>Transações Financeiras</h1>
+
+  <app-dashboard></app-dashboard>
+
+  <div class="section">
+    <h2>{{ editingTransacao ? 'Editar transação' : 'Nova transação' }}</h2>
+    <app-transacao-form
+      [transacao]="editingTransacao"
+      (saved)="onFormSaved()"
+      (cancelled)="onFormCancelled()"
+    ></app-transacao-form>
+  </div>
+
+  <hr />
+
+  <div class="section">
+    <h2>Lista</h2>
+    <app-transacao-list></app-transacao-list>
+  </div>
+</div>
+
+<router-outlet />
