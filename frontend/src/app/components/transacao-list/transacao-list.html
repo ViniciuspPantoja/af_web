@@ -1,12 +1,45 @@
 <div class="list-container">
+  <!-- Filtros -->
+  <div class="filters-section">
+    <div class="filter-group">
+      <label for="filter-categoria">Filtrar por Categoria:</label>
+      <select 
+        id="filter-categoria" 
+        class="filter-select"
+        [(ngModel)]="selectedCategoria"
+        (change)="onFilterChange()">
+        <option value="">Todas as categorias</option>
+        <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <label for="filter-tipo">Filtrar por Tipo:</label>
+      <select 
+        id="filter-tipo" 
+        class="filter-select"
+        [(ngModel)]="selectedTipo"
+        (change)="onFilterChange()">
+        <option value="">Todos os tipos</option>
+        <option value="receita">Receita</option>
+        <option value="despesa">Despesa</option>
+      </select>
+    </div>
+  </div>
+
   <div *ngIf="filteredTransacoes.length === 0" class="empty-state">
     Nenhuma transação encontrada.
   </div>
 
   <ul *ngIf="filteredTransacoes.length > 0" class="transacao-list">
-    <li *ngFor="let transacao of filteredTransacoes" class="transacao-item">
+    <li *ngFor="let transacao of filteredTransacoes" 
+        class="transacao-item"
+        [ngClass]="getCategoriaClass(transacao.categoria)">
       <span class="transacao-text">
-        {{ transacao.descricao }} — {{ transacao.categoria }} — 
+        <span class="categoria-badge" [style.background-color]="getCategoriaColor(transacao.categoria)">
+          {{ transacao.categoria }}
+        </span>
+        {{ transacao.descricao }} — 
         {{ transacao.tipo === 'receita' ? 'Receita' : 'Despesa' }} — 
         {{ formatDate(transacao.data) }} — 
         <span [class.receita-color]="transacao.tipo === 'receita'" [class.despesa-color]="transacao.tipo === 'despesa'">

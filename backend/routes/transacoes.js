@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Transacao = require('../models/Transacao');
 
-// GET - Listar todas as transações
 router.get('/', async (req, res) => {
   try {
     const { categoria, tipo } = req.query;
@@ -24,7 +23,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET - Obter uma transação por id
 router.get('/:id', async (req, res) => {
   try {
     const transacao = await Transacao.findById(req.params.id);
@@ -37,7 +35,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Função auxiliar para converter data de texto para Date
 const parseDate = (dateString) => {
   if (!dateString) return new Date();
   
@@ -57,11 +54,9 @@ const parseDate = (dateString) => {
     return parsed;
   }
   
-  // Se não conseguir, retorna data atual
   return new Date();
 };
 
-// POST - Criar nova transação
 router.post('/', async (req, res) => {
   try {
     const { tipo, categoria, descricao, valor, data } = req.body;
@@ -85,7 +80,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT - Atualizar transação
 router.put('/:id', async (req, res) => {
   try {
     const { tipo, categoria, descricao, valor, data } = req.body;
@@ -108,7 +102,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE - Deletar transação
 router.delete('/:id', async (req, res) => {
   try {
     const transacao = await Transacao.findById(req.params.id);
@@ -123,11 +116,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// GET - Obter saldo total (sempre calcula todas as transações, sem filtros)
 router.get('/saldo/total', async (req, res) => {
   try {
-    // Usar agregação do MongoDB para calcular o saldo total
-    // Isso garante que sempre retorna o saldo de TODAS as transações, independente de filtros
     const result = await Transacao.aggregate([
       {
         $group: {
@@ -152,7 +142,6 @@ router.get('/saldo/total', async (req, res) => {
       }
     ]);
     
-    // Se não houver transações, retorna saldo 0
     const saldo = result.length > 0 ? result[0].saldo : 0;
     res.json({ saldo });
   } catch (error) {

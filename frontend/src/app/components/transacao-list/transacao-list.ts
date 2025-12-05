@@ -23,9 +23,7 @@ export class TransacaoList implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Carregar lista imediatamente ao inicializar o componente
     this.loadTransacoes();
-    // Recarregar lista quando uma transação for atualizada
     window.addEventListener('transacaoUpdated', () => {
       this.loadTransacoes();
     });
@@ -37,7 +35,6 @@ export class TransacaoList implements OnInit {
         this.transacoes = data;
         this.filteredTransacoes = data;
         this.extractCategorias();
-        // detecta as mudanças na pagina e recarrega os dados
         this.cdr.detectChanges();
       },
       error: (error) => {
@@ -62,7 +59,6 @@ export class TransacaoList implements OnInit {
     ).subscribe({
       next: (data) => {
         this.filteredTransacoes = data;
-        // Forçar detecção de mudanças após filtrar
         this.cdr.detectChanges();
       },
       error: (error) => {
@@ -73,13 +69,11 @@ export class TransacaoList implements OnInit {
   }
 
   onEdit(transacao: Transacao): void {
-    // Emitir evento customizado para carregar a transação no formulário
     const event = new CustomEvent('editTransacao', {
       detail: transacao
     });
     window.dispatchEvent(event);
     
-    // Scroll suave até o formulário
     const formElement = document.querySelector('app-transacao-form');
     if (formElement) {
       formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -92,7 +86,6 @@ export class TransacaoList implements OnInit {
     if (confirm('Tem certeza que deseja excluir esta transação?')) {
       this.transacaoService.deleteTransacao(id).subscribe({
         next: () => {
-          // Recarregar a página para atualizar os resultados
           window.location.reload();
         },
         error: (error) => {
@@ -107,10 +100,34 @@ export class TransacaoList implements OnInit {
     return transacao.tipo === 'receita' ? 'receita' : 'despesa';
   }
 
+  getCategoriaClass(categoria: string): string {
+    // Retorna uma classe CSS baseada na categoria (para estilização)
+    const categoriaLower = categoria.toLowerCase().replace(/\s+/g, '-');
+    return `categoria-${categoriaLower}`;
+  }
+
+  getCategoriaColor(categoria: string): string {
+    // Mapa de cores para cada categoria
+    const coresCategorias: { [key: string]: string } = {
+      'Alimentação': '#FF6B6B',
+      'Transporte': '#4ECDC4',
+      'Moradia': '#45B7D1',
+      'Saúde': '#96CEB4',
+      'Educação': '#FFEAA7',
+      'Lazer': '#DDA0DD',
+      'Salário': '#98D8C8',
+      'Freelance': '#F7DC6F',
+      'Investimentos': '#85C1E2',
+      'Outros': '#BDC3C7'
+    };
+    
+    // Retorna a cor da categoria ou uma cor padrão
+    return coresCategorias[categoria] || '#95A5A6';
+  }
+
   formatDate(date: Date | string | undefined): string {
     if (!date) return '';
     
-    // Extrair apenas a parte da data sem considerar timezone
     let dateStr = '';
     if (typeof date === 'string') {
       dateStr = date;
@@ -118,19 +135,16 @@ export class TransacaoList implements OnInit {
       dateStr = date.toISOString();
     }
     
-    // Se já está no formato DD/MM/YYYY, retornar diretamente
     if (dateStr.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
       return dateStr;
     }
     
-    // Extrair apenas a parte da data (YYYY-MM-DD) de uma string ISO
     let datePart = '';
     if (dateStr.includes('T')) {
-      datePart = dateStr.split('T')[0]; // Pega YYYY-MM-DD
+      datePart = dateStr.split('T')[0];
     } else if (dateStr.match(/^\d{4}-\d{2}-\d{2}/)) {
-      datePart = dateStr.substring(0, 10); // Pega YYYY-MM-DD
+      datePart = dateStr.substring(0, 10);
     } else {
-      // Fallback: usar Date mas extrair componentes locais
       const d = new Date(date);
       if (!isNaN(d.getTime())) {
         const day = String(d.getDate()).padStart(2, '0');
@@ -141,7 +155,6 @@ export class TransacaoList implements OnInit {
       return '';
     }
     
-    // Converter de YYYY-MM-DD para DD/MM/YYYY
     if (datePart) {
       const [year, month, day] = datePart.split('-');
       return `${day}/${month}/${year}`;

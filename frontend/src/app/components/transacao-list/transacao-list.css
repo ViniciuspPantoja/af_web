@@ -128,3 +128,73 @@
   border-color: #999;
 }
 
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.categoria-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.transacao-item {
+  padding: 0.75rem;
+  border-left: 4px solid;
+  transition: all 0.2s ease;
+}
+
+.transacao-item:hover {
+  background-color: #f8f9fa;
+  transform: translateX(4px);
+}
+
+/* Cores de borda por categoria */
+.categoria-alimentação {
+  border-left-color: #FF6B6B;
+}
+
+.categoria-transporte {
+  border-left-color: #4ECDC4;
+}
+
+.categoria-moradia {
+  border-left-color: #45B7D1;
+}
+
+.categoria-saúde {
+  border-left-color: #96CEB4;
+}
+
+.categoria-educação {
+  border-left-color: #FFEAA7;
+}
+
+.categoria-lazer {
+  border-left-color: #DDA0DD;
+}
+
+.categoria-salário {
+  border-left-color: #98D8C8;
+}
+
+.categoria-freelance {
+  border-left-color: #F7DC6F;
+}
+
+.categoria-investimentos {
+  border-left-color: #85C1E2;
+}
+
+.categoria-outros {
+  border-left-color: #BDC3C7;
+}
+

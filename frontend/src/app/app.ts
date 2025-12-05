@@ -20,7 +20,6 @@ export class App implements OnInit {
   constructor(private transacaoService: TransacaoService) {}
 
   ngOnInit(): void {
-    // Escutar evento de edição de transação
     window.addEventListener('editTransacao', (event: any) => {
       this.editingTransacao = event.detail;
     });
@@ -28,7 +27,6 @@ export class App implements OnInit {
 
   onFormSaved(): void {
     this.editingTransacao = null;
-    // Recarregar a página para atualizar os resultados
     window.location.reload();
   }
 
